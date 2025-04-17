@@ -1,0 +1,22 @@
+import { Types } from "mongoose";
+import { {{ modelName }} } from '@app/api/models';
+
+export const {{ controllerName }} = async ({ 
+  {{#each fieldNames}}
+    {{~this}},
+  {{/each}}
+}) => {
+
+  const {{ modelPrimaryKeyName }} = new Types.ObjectId();
+  const modelParams = {
+    {{ modelPrimaryKeyName }},
+		{{#each fieldNames}}
+			{{~this}},
+		{{/each}}
+  };
+
+  const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
+  await {{ modelInstanceName }}.save();
+
+  return {{ modelInstanceName }}._id;
+}

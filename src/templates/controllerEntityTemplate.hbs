@@ -1,0 +1,9 @@
+{{#each controllers ~}}
+	import { {{ name }} } from "./{{ name ~}}";
+{{/each}}
+
+export const {{ entityName }} = { 
+	{{#each controllers ~}}
+		{{ methodName }}: {{ name ~}},
+	{{/each}}
+};

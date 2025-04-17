@@ -1,0 +1,8 @@
+import { {{ modelName }} } from '@app/api/models';
+
+export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+  const {{ baseName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
+
+  return {{ baseName }} ;
+};
+

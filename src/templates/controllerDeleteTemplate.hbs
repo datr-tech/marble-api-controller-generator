@@ -1,0 +1,19 @@
+import { Types } from "mongoose";
+import { {{ modelName }} } from '@app/api/models';
+
+export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+  const res = await {{ modelName }}.findOneAndUpdate(
+    {
+      _id: {{ modelPrimaryKeyName }}
+    },
+    {
+      adminStatusId: new Types.ObjectId()
+    },
+    {
+      includeResultMetadata: true
+    }
+  );
+
+  return res;
+};
+

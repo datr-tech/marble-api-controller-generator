@@ -1,0 +1,1 @@
+export { schemaMethodsMap } from './schemaMethodsMap';
