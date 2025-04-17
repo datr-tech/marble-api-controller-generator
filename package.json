@@ -1,5 +1,5 @@
 {
-  "name": "@datr.tech/marmalade-api-controller-generator",
+  "name": "@datr.tech/marble-api-controller-generator",
   "version": "0.3.0",
   "private": false,
   "description": "Marmalade API controller generator",
@@ -8,13 +8,13 @@
 		"controller",
     "datr.tech",
 		"generator",
-    "marmalade",
+    "marble",
 		"typescript"
   ],
-  "homepage": "https://github.com/datr.tech/marmalade-api-controller-generator",
+  "homepage": "https://github.com/datr.tech/marble-api-controller-generator",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/datr.tech/marmalade-api-controller-generator.git"
+    "url": "git+https://github.com/datr.tech/marble-api-controller-generator.git"
   },
   "license": "MIT",
   "author": "admin <admin@datr.tech>",

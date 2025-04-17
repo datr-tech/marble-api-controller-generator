@@ -1,3 +1,3 @@
-## @datr.tech/marmalade-api-controller-generator
+## @datr.tech/marble-api-controller-generator
 
 ## Development in progress
