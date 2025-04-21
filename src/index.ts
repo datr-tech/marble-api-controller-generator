@@ -1,7 +1,7 @@
 import { schemasPerService } from '@freight/services-schemas';
-import { generateController, generateControllerEntities } from '@app/generators';
-import { parseSchemas } from '@app/parsers';
-import { createControllerDir, removeControllerDir, writeController, writeControllerEntity, writeControllerEntityIndex } from '@app/writers';
+import { generateController, generateControllerEntities } from '@app-marble-api-controller-generator/generators';
+import { parseSchemas } from '@app-marble-api-controller-generator/parsers';
+import { createControllerDir, removeControllerDir, writeController, writeControllerEntity, writeControllerEntityIndex } from '@app-marble-api-controller-generator/writers';
 
 schemasPerService.forEach((serviceSchemas) => {
   const { service, schemas } = serviceSchemas;

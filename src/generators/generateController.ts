@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import Handlebars from 'handlebars';
-import { deriveTemplateName } from '@app/utils';
+import { deriveTemplateName } from '@app-marble-api-controller-generator/utils';
 
 export const generateController = ({ ...parsedSchema }) => {
   const { baseName, controllerName, methodName } = parsedSchema;

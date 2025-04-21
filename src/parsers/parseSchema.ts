@@ -5,7 +5,7 @@ import {
   deriveModelPrimaryKeyName,
   deriveSchemaBaseName,
   deriveSchemaMethodName,
-} from '@app/utils';
+} from '@app-marble-api-controller-generator/utils';
 
 export const parseSchema = (serviceName, schemaName, schema) => {
   const baseName = deriveSchemaBaseName(schemaName);

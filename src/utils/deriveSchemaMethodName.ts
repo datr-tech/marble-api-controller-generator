@@ -1,4 +1,4 @@
-import { schemaMethodsMap } from '@app/maps';
+import { schemaMethodsMap } from '@app-marble-api-controller-generator/maps';
 
 export const deriveSchemaMethodName = (schemaName) => {
   let schemaMethodName = '';
