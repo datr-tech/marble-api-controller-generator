@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { freightMonorepoRoot } from '@app-marble-api-controller-generator/config';
+import { freightMonorepoRoot } from '@app-macg/config';
 
 export const writeController = (controllerDef, service) => {
   const { contents, dirName, name } = controllerDef;
