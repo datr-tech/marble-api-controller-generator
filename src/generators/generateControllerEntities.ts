@@ -13,8 +13,13 @@ export const generateControllerEntities = (controllerDefs) => {
 
   const controllerEntityDefs = Object.keys(entityBaseNames).map((entityName) => {
     const baseName = entityBaseNames[entityName];
-    const controllerDefsPerBaseName = controllerDefs.filter((controllerDef) => controllerDef.baseName == baseName);
-    const controllerEntityDef = generateControllerEntity(entityName, controllerDefsPerBaseName);
+    const controllerDefsPerBaseName = controllerDefs.filter(
+      (controllerDef) => controllerDef.baseName == baseName,
+    );
+    const controllerEntityDef = generateControllerEntity(
+      entityName,
+      controllerDefsPerBaseName,
+    );
 
     return controllerEntityDef;
   });

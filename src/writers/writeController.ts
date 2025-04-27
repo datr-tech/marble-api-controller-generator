@@ -1,10 +1,13 @@
+import { freightMonorepoRoot } from '@app-macg/config';
 import fs from 'node:fs';
 import path from 'node:path';
-import { freightMonorepoRoot } from '@app-macg/config';
 
 export const writeController = (controllerDef, service) => {
   const { contents, dirName, name } = controllerDef;
-  const dirPath = path.resolve(freightMonorepoRoot, `apps/${service}-api/src/api/controllers/${dirName}`);
+  const dirPath = path.resolve(
+    freightMonorepoRoot,
+    `apps/${service}-api/src/api/controllers/${dirName}`,
+  );
   const controllerPath = `${dirPath}/${name}.ts`;
 
   const doesDirPathExist = fs.existsSync(dirPath);

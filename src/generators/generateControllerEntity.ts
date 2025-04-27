@@ -1,6 +1,6 @@
+import Handlebars from 'handlebars';
 import fs from 'node:fs';
 import path from 'node:path';
-import Handlebars from 'handlebars';
 
 export const generateControllerEntity = (entityName, controllerDefsPerBaseName) => {
   const templatePath = path.resolve(`./src/templates/controllerEntityTemplate.hbs`);
@@ -19,7 +19,11 @@ export const generateControllerEntity = (entityName, controllerDefsPerBaseName) 
 
   const templateParams = { controllers, entityName };
   const templateStr = fs.readFileSync(templatePath, { encoding: 'utf8', flag: 'r' });
-  const templateFn = Handlebars.compile(templateStr, { noEscape: true, preventIndent: true, ignoreStandalone: true });
+  const templateFn = Handlebars.compile(templateStr, {
+    noEscape: true,
+    preventIndent: true,
+    ignoreStandalone: true,
+  });
 
   const entityDef = {
     name: entityName,

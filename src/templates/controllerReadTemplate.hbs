@@ -1,8 +1,9 @@
-import { {{ modelName }} } from '@app/api/models';
+import { {{ modelName }} } from '{{ appRef }}/api/models';
+import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
 
-export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }} }) => {
-  const {{ baseName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+  const {{ modelInstanceName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
 
-  return {{ baseName }} ;
+  return { {{ modelInstanceName }} };
 };
 

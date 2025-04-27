@@ -1,5 +1,4 @@
-export const deriveControllerName = (baseName, baseNameUpperFirst, methodName) => {
-  const controllerName = baseName + 'Controller' + methodName + baseNameUpperFirst;
+import { controllerKeyword } from '@app-macg/config';
 
-  return controllerName;
-};
+export const deriveControllerName = (baseName, baseNameUpperFirst, methodName) =>
+  baseName + controllerKeyword + methodName + baseNameUpperFirst;

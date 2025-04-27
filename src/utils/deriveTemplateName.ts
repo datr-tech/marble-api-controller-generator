@@ -1,5 +1,4 @@
-export const deriveTemplateName = (methodName) => {
-  const templateName = 'controller' + methodName + 'Template';
+import { controllerKeywordLcase, templateKeyword } from '@app-macg/config';
 
-  return templateName;
-};
+export const deriveTemplateName = (methodName) =>
+  controllerKeywordLcase + methodName + templateKeyword;

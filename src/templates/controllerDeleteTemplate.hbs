@@ -1,8 +1,9 @@
 import { Types } from "mongoose";
-import { {{ modelName }} } from '@app/api/models';
+import { {{ modelName }} } from '{{ appRef }}/api/models';
+import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
 
-export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }} }) => {
-  const res = await {{ modelName }}.findOneAndUpdate(
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+  await {{ modelName }}.findOneAndUpdate(
     {
       _id: {{ modelPrimaryKeyName }}
     },
@@ -14,6 +15,6 @@ export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }} }) => {
     }
   );
 
-  return res;
+  return { {{ modelPrimaryKeyName }} };
 };
 

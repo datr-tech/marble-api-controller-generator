@@ -1,7 +1,8 @@
 import { Types } from "mongoose";
-import { {{ modelName }} } from '@app/api/models';
+import { {{ modelName }} } from '{{ appRef }}/api/models';
+import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
 
-export const {{ controllerName }} = async ({ 
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ 
   {{#each fieldNames}}
     {{~this}},
   {{/each}}
@@ -18,5 +19,5 @@ export const {{ controllerName }} = async ({
   const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
   await {{ modelInstanceName }}.save();
 
-  return {{ modelInstanceName }}._id;
+  return { {{ modelPrimaryKeyName }} };
 }

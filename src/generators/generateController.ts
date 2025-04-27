@@ -1,23 +1,16 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import Handlebars from 'handlebars';
+import { controllerKeyword } from '@app-macg/config';
 import { deriveTemplateName } from '@app-macg/utils';
+import { fsTemplate } from '@datr.tech/marble-generator-file-system-components';
 
 export const generateController = ({ ...parsedSchema }) => {
   const { baseName, controllerName, methodName } = parsedSchema;
-
-  const dirName = baseName + 'Controller';
+  const dirName = baseName + controllerKeyword;
   const templateName = deriveTemplateName(methodName);
-  const templatePath = path.resolve(`./src/templates/${templateName}.hbs`);
-  const templateStr = fs.readFileSync(templatePath, { encoding: 'utf8', flag: 'r' });
-  const templateFn = Handlebars.compile(templateStr, { noEscape: true, preventIndent: true, ignoreStandalone: true });
 
-  const controllerDef = {
+  return {
     baseName,
-    contents: templateFn(parsedSchema),
+    contents: fsTemplate.getContents(templateName, parsedSchema),
     dirName,
     name: controllerName,
   };
-
-  return controllerDef;
 };

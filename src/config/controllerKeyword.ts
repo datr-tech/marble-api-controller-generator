@@ -1,0 +1,1 @@
+export const controllerKeyword = 'Controller';

@@ -1,5 +1,3 @@
-export const deriveModelPrimaryKeyName = (baseName) => {
-  const modelPrimaryKeyName = baseName + 'Id';
+import { idKeyword } from '@app-macg/config';
 
-  return modelPrimaryKeyName;
-};
+export const deriveModelPrimaryKeyName = (baseName) => baseName + idKeyword;

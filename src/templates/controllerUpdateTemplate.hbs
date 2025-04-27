@@ -1,8 +1,9 @@
-import { {{ modelName }} } from '@app/api/models';
+import { {{ modelName }} } from '{{ appRef }}/api/models';
+import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
 
-export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }}, payload }) => {
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }}, payload }) => {
 
-  const res = await {{ modelName }}.findOneAndUpdate(
+  await {{ modelName }}.findOneAndUpdate(
     {
       _id: {{ modelPrimaryKeyName }}
     },
@@ -12,15 +13,6 @@ export const {{ controllerName }} = async ({ {{ modelPrimaryKeyName }}, payload 
     }
   );
 
-  let existingDocUpdated;
-
-  if (typeof res !== "undefined"
-			&& typeof res.lastErrorObject !== "undefined"
-			&& typeof res.lastErrorObject.updatedExisting !== "undefined") {
-
-		existingDocUpdated = (res.lastErrorObject.updatedExisting === false);
-	}
-
-  return existingDocUpdated;
+  return { {{ modelPrimaryKeyName }} };
 }
 
