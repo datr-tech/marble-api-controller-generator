@@ -31,14 +31,13 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * "soft deleted" model.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}.id };
+		stat.payload = { {{ modelPrimaryKeyName }} };
     
     /*
      * Cast the response object to
      * '{{ controllerInterfaceName }}OutputSuccess',
      * where the casting interface is a component of
-     * the binary union type
-     * '{{ controllerInterfaceName }}Output'.
+     * the binary union type '{{ controllerInterfaceName }}Output'.
      */ 
     return stat as {{ controllerInterfaceName }}OutputSuccess;
 	

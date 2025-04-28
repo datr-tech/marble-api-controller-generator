@@ -22,9 +22,10 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
 		stat.payload = { {{ modelInstanceName }} };
 		
     /*
-     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
-     * where the casting interface is a component of the binary union type
-     * '{{ controllerInterfaceName }}Output'.
+     * Cast the response object to
+     * '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of
+     * the binary union type '{{ controllerInterfaceName }}Output'.
      */ 
 		return stat as {{ controllerInterfaceName }}OutputSuccess;
 

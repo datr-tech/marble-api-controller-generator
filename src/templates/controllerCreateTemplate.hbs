@@ -24,28 +24,24 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
 		/*
      * Use the populated 'modelParams' variable
      * to create a new instance of '{{ modelName }}'.
-     * 'db-{{ serviceName }}'.
+     * 'db-{{ serviceName }}'. Then save the created
+     * model to the associated store: 'db-{{ serviceName }}',
      */
 		const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
-
-    /*
-     * The save the created model to the associated store: 'db-{{ serviceName }}',
-     */
 		await {{ modelInstanceName }}.save();
 	
 		/*
      * Use the standard controller response object,
-     * 'stat', to return the found model.
+     * 'stat', to return the found model's primary key.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}.id };
+		stat.payload = { {{ modelPrimaryKeyName }} };
     
     /*
      * Cast the response object to
      * '{{ controllerInterfaceName }}OutputSuccess',
      * where the casting interface is a component of
-     * the binary union type
-     * '{{ controllerInterfaceName }}Output'.
+     * the binary union type '{{ controllerInterfaceName }}Output'.
      */ 
 		return stat as {{ controllerInterfaceName }}OutputSuccess;
 
