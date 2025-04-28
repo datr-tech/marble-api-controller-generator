@@ -10,12 +10,7 @@ export const writeControllerEntity = (controllerEntityDef, service) => {
     `api-${service}/src/api/controllers/${name}`,
   );
   const controllerEntityPath = `${dirPath}/${name}.ts`;
-  const doesDirPathExist = fs.existsSync(dirPath);
   const doesControllerPathExist = fs.existsSync(controllerEntityPath);
-
-  if (!doesDirPathExist) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
 
   if (doesControllerPathExist) {
     fs.unlinkSync(controllerEntityPath);

@@ -10,12 +10,7 @@ export const writeControllerEntityIndex = (controllerEntityDef, service) => {
     `api-${service}/src/api/controllers/${name}`,
   );
   const entityIndexPath = `${dirPath}/index.ts`;
-  const doesDirPathExist = fs.existsSync(dirPath);
   const doesEntityIndexPathExist = fs.existsSync(entityIndexPath);
-
-  if (!doesDirPathExist) {
-    fs.mkdirSync(dirPath, { recursive: true });
-  }
 
   if (doesEntityIndexPathExist) {
     fs.unlinkSync(entityIndexPath);
