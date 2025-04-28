@@ -1,0 +1,7 @@
+import { Types } from "mongoose";
+
+export interface {{ controllerInterfaceName }}Input {
+  {{#each fields}}
+    {{ key ~}} {{#if optionalInInterface}} ?: {{ else }} : {{/if }} {{ interfaceType }}
+  {{/each}}
+}

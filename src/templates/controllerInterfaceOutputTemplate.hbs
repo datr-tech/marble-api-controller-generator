@@ -1,0 +1,17 @@
+import { Types } from 'mongoose';
+
+interface {{ controllerInterfaceName }}OutputError {
+  error: true;
+	payload: 	{ 
+		message: string;
+	};
+}
+
+interface {{ controllerInterfaceName }}OutputSuccess {
+  error: false;
+	payload: 	{ 
+		{{ modelPrimaryKeyName }}: {{ keywords.typesObjectId }};
+	};
+}
+
+export type {{ controllerInterfaceName }}Output = {{ controllerInterfaceName }}OutputSuccess | {{ controllerInterfaceName }}OutputError;

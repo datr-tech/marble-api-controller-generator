@@ -1,0 +1,15 @@
+/**
+ * {{ controllerName }}
+ *
+ * The {{ serviceName }} API {{ methodNameLcase }} {{ baseName }} {{ keywords.controllerLcase }}.
+ *
+ * @param { {{controllerInterfaceName }}Input } params
+  {{#each fields}}
+ * @param { {{ controllerType }} } params.{{ key }} {{#if optionalInController }} (Optional) {{/if ~}}
+  {{/each}}
+ *
+ * @returns { {{controllerInterfaceName }}Output } { error: false, payload: { ... } }} | { error: true, payload: { message } }
+ * @throws On Mongoose failure
+ *
+ * @see Generated using {{ app.name }} (v {{ app.version }})
+ */ 

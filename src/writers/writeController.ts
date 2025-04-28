@@ -1,12 +1,13 @@
-import { freightMonorepoRoot } from '@app-macg/config';
+import { datrTechRoot } from '@app-macg/config';
+import { logger } from '@datr.tech/leith-common-logger';
 import fs from 'node:fs';
 import path from 'node:path';
 
 export const writeController = (controllerDef, service) => {
   const { contents, dirName, name } = controllerDef;
   const dirPath = path.resolve(
-    freightMonorepoRoot,
-    `apps/${service}-api/src/api/controllers/${dirName}`,
+    datrTechRoot,
+    `api-${service}/src/api/controllers/${dirName}`,
   );
   const controllerPath = `${dirPath}/${name}.ts`;
 
@@ -22,4 +23,5 @@ export const writeController = (controllerDef, service) => {
   }
 
   fs.writeFileSync(controllerPath, contents, 'utf8');
+  logger.info(`ADD CONTROLLER: ${controllerPath}`);
 };

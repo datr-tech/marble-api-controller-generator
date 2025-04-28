@@ -1,5 +1,11 @@
 export { createControllerDir } from './createControllerDir';
 export { removeControllerDir } from './removeControllerDir';
 export { writeController } from './writeController';
+export { writeControllerEntities } from './writeControllerEntities';
 export { writeControllerEntity } from './writeControllerEntity';
 export { writeControllerEntityIndex } from './writeControllerEntityIndex';
+export { writeControllerEntityIndexes } from './writeControllerEntityIndexes';
+export { writeControllers } from './writeControllers';
+export { writeInterface } from './writeInterface';
+export { writeInterfaceIndex } from './writeInterfaceIndex';
+export { writeInterfaces } from './writeInterfaces';

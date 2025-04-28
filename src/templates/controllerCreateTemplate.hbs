@@ -1,23 +1,28 @@
-import { Types } from "mongoose";
-import { {{ modelName }} } from '{{ appRef }}/api/models';
-import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
+{{ imports }}
 
+{{ jsdoc }}
 export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ 
-  {{#each fieldNames}}
-    {{~this}},
-  {{/each}}
+  {{#fields}}
+    {{ key }},
+  {{/fields}}
 }) => {
 
-  const {{ modelPrimaryKeyName }} = new Types.ObjectId();
-  const modelParams = {
-    {{ modelPrimaryKeyName }},
-		{{#each fieldNames}}
-			{{~this}},
-		{{/each}}
-  };
+	{{ tryCatchHeader }}
 
-  const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
-  await {{ modelInstanceName }}.save();
+		const {{ modelPrimaryKeyName }} = new Types.ObjectId();
+		const modelParams = {
+			{{ modelPrimaryKeyName }},
+			{{#fields}}
+				{{ this.key }},
+			{{/fields}}
+		};
 
-  return { {{ modelPrimaryKeyName }} };
+		const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
+		await {{ modelInstanceName }}.save();
+	
+		stat.error = false;
+		stat.payload = { {{ modelPrimaryKeyName }} };
+		return stat;
+
+	{{ tryCatchFooter }}
 }

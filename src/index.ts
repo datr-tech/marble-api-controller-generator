@@ -1,49 +1,55 @@
-import { inputKeyword } from '@app-macg/config';
+import { keywords } from '@app-macg/config';
+import { fields } from '@app-macg/fields';
 import {
   generateControllerEntities,
+  generateControllerInterfaceIndex,
   generateControllerInterfaces,
-  generateControllerInterfacesInput,
   generateControllers,
 } from '@app-macg/generators';
 import { parseSchemas } from '@app-macg/parsers';
 import {
   createControllerDir,
   removeControllerDir,
-  writeController,
-  writeControllerEntity,
-  writeControllerEntityIndex,
+  writeControllerEntities,
+  writeControllerEntityIndexes,
+  writeControllers,
+  writeInterfaceIndex,
+  writeInterfaces,
 } from '@app-macg/writers';
+
 import * as schemas from '@datr.tech/cargo-router-validation-schemas';
 import 'dotenv/config';
-
-const dryRun = process.env.DRY_RUN || true;
 
 Object.keys(schemas).forEach((service) => {
   const schemasPerService = schemas[service];
   const parsedSchemas = parseSchemas(service, schemasPerService);
-
-  const controllerDefs = generateControllers(parsedSchemas);
+  const parsedSchemasRevised = fields.getRevisedFieldsPerParsedSchemas({ parsedSchemas });
+  const controllerDefs = generateControllers(parsedSchemasRevised);
   const controllerEntityDefs = generateControllerEntities(controllerDefs);
-  const controllerInterfaceDefs = generateControllerInterfaces(parsedSchemas);
-  const controllerInterfaceInputDefs = generateControllerInterfacesInput(
-    parsedSchemas,
-    inputKeyword,
+
+  removeControllerDir(service);
+  createControllerDir(service);
+  writeControllers(controllerDefs, service);
+  writeControllerEntities(controllerEntityDefs, service);
+  writeControllerEntityIndexes(controllerEntityDefs, service);
+
+  const controllerInterfaceDefs = generateControllerInterfaces(parsedSchemasRevised);
+  const controllerInterfaceInputDefs = generateControllerInterfaces(
+    parsedSchemasRevised,
+    keywords.input,
   );
-  //const controllerInterfaceOutputDefs = generateControllerInterfaces(parsedSchemas, outputKeyword);
+  const controllerInterfaceOutputDefs = generateControllerInterfaces(
+    parsedSchemasRevised,
+    keywords.output,
+  );
+  const controllerInterfaceIndexDef = generateControllerInterfaceIndex({
+    controllerInterfaceDefs,
+    controllerInterfaceInputDefs,
+    controllerInterfaceOutputDefs,
+  });
 
-  console.log({ controllerInterfaceDefs });
-  console.log({ controllerInterfaceInputDefs });
-
-  if (!dryRun) {
-    removeControllerDir(service);
-    createControllerDir(service);
-
-    controllerDefs.forEach((controllerDef) => writeController(controllerDef, service));
-    controllerEntityDefs.forEach((controllerEntityDef) =>
-      writeControllerEntity(controllerEntityDef, service),
-    );
-    controllerEntityDefs.forEach((controllerEntityDef) =>
-      writeControllerEntityIndex(controllerEntityDef, service),
-    );
-  }
+  writeInterfaces(controllerInterfaceDefs, service);
+  writeInterfaces(controllerInterfaceInputDefs, service);
+  writeInterfaces(controllerInterfaceOutputDefs, service);
+  writeInterfaceIndex(controllerInterfaceIndexDef, service);
 });

@@ -1,44 +1,49 @@
-import {
-  deriveAppRef,
-  deriveControllerInterfaceName,
-  deriveControllerName,
-  deriveModelInstanceName,
-  deriveModelInterfaceName,
-  deriveModelInterfacePath,
-  deriveModelName,
-  deriveModelPrimaryKeyName,
-  deriveSchemaBaseName,
-  deriveSchemaMethodName,
-} from '@app-macg/utils';
+import { app, keywords } from '@app-macg/config';
+import { controllers } from '@app-macg/controllers';
+import { models } from '@app-macg/models';
+import { refs } from '@app-macg/refs';
+import { schemas } from '@app-macg/schemas';
 
 export const parseSchema = (serviceName, schemaName, schema) => {
-  const appRef = deriveAppRef(serviceName);
-  const baseName = deriveSchemaBaseName(schemaName);
-  const baseNameUpperFirst = baseName.charAt(0).toUpperCase() + baseName.slice(1);
-  const methodName = deriveSchemaMethodName(schemaName);
-  const controllerInterfaceName = deriveControllerInterfaceName(
-    baseNameUpperFirst,
-    methodName,
-  );
-  const controllerName = deriveControllerName(baseName, baseNameUpperFirst, methodName);
-  const modelInstanceName = deriveModelInstanceName(baseName);
-  const modelInterfaceName = deriveModelInterfaceName(baseNameUpperFirst);
-  const modelInterfacePath = deriveModelInterfacePath(serviceName, modelInterfaceName);
-  const modelName = deriveModelName(baseNameUpperFirst);
-  const modelPrimaryKeyName = deriveModelPrimaryKeyName(baseName);
-  const fieldNames = Object.keys(schema);
+  const { appRef } = refs.parse({ serviceName });
 
-  return {
-    appRef,
+  const { baseName, baseNameUcFirst, methodName, methodNameLcase, fields } =
+    schemas.parse({ schema, schemaName });
+
+  const { controllerInterfaceName, controllerName } = controllers.derive({
     baseName,
-    controllerInterfaceName,
-    controllerName,
-    fieldNames,
+    baseNameUcFirst,
     methodName,
+  });
+
+  const {
     modelInstanceName,
     modelInterfaceName,
     modelInterfacePath,
     modelName,
     modelPrimaryKeyName,
+  } = models.derive({
+    baseName,
+    baseNameUcFirst,
+    serviceName,
+  });
+
+  return {
+    app,
+    appRef,
+    baseName,
+    baseNameUcFirst,
+    controllerInterfaceName,
+    controllerName,
+    fields,
+    keywords,
+    methodName,
+    methodNameLcase,
+    modelInstanceName,
+    modelInterfaceName,
+    modelInterfacePath,
+    modelName,
+    modelPrimaryKeyName,
+    serviceName,
   };
 };

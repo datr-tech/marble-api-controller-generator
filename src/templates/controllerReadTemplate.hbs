@@ -1,9 +1,13 @@
-import { {{ modelName }} } from '{{ appRef }}/api/models';
-import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
+{{ imports }}
 
+{{ jsdoc }}
 export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
-  const {{ modelInstanceName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
+	{{ tryCatchHeader }}
+		const {{ modelInstanceName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
 
-  return { {{ modelInstanceName }} };
+		stat.error = false;
+		stat.payload = { {{ modelInstanceName }} };
+		return stat;
+	{{ tryCatchFooter }}
 };
 

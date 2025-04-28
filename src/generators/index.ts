@@ -1,8 +1,11 @@
 export { generateController } from './generateController';
 export { generateControllerEntities } from './generateControllerEntities';
 export { generateControllerEntity } from './generateControllerEntity';
+export { generateControllerImports } from './generateControllerImports';
 export { generateControllerInterface } from './generateControllerInterface';
-export { generateControllerInterfaceInput } from './generateControllerInterfaceInput';
+export { generateControllerInterfaceIndex } from './generateControllerInterfaceIndex';
 export { generateControllerInterfaces } from './generateControllerInterfaces';
-export { generateControllerInterfacesInput } from './generateControllerInterfacesInput';
+export { generateControllerJsDoc } from './generateControllerJsDoc';
 export { generateControllers } from './generateControllers';
+export { generateControllerTryCatchFooter } from './generateControllerTryCatchFooter';
+export { generateControllerTryCatchHeader } from './generateControllerTryCatchHeader';
