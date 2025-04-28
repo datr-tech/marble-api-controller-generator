@@ -1,6 +1,6 @@
 {
   "name": "@datr.tech/marble-api-controller-generator",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": false,
   "description": "Marble API controller generator",
   "keywords": [
@@ -41,11 +41,11 @@
     "prepush": "npm run lint",
     "preversion": "npm-run-all format lint spell",
     "spell": "npx cspell .",
-    "start": "DRY_RUN=false node./dist/index.js",
+    "start": "node./dist/index.js",
     "test": "npm run test:unit",
     "test:it": "npx jest -c ./jest.config.integration.json ./test/integration",
     "test:unit": "npx jest -c ./jest.config.unit.json ./test/unit --coverage",
-    "version": "npm-run-all build test:it changelog"
+    "version": "npm-run-all build changelog"
   },
   "dependencies": {
     "@datr.tech/cargo-router-validation-schemas": "^0.4.1",
