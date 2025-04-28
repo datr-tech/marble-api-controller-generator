@@ -38,11 +38,13 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * 'stat', to return the found model.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}.{{ modelPrimaryKeyName }} };
+		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}.id };
     
     /*
-     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
-     * where the casting interface is a component of the binary union type
+     * Cast the response object to
+     * '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of
+     * the binary union type
      * '{{ controllerInterfaceName }}Output'.
      */ 
 		return stat as {{ controllerInterfaceName }}OutputSuccess;
