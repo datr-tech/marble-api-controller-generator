@@ -1,3 +1,4 @@
+export { generateBaseStat } from './generateBaseStat';
 export { generateController } from './generateController';
 export { generateControllerEntities } from './generateControllerEntities';
 export { generateControllerEntity } from './generateControllerEntity';

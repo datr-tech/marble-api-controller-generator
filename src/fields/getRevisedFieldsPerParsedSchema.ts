@@ -28,6 +28,7 @@ export const getRevisedFieldsPerParsedSchema = ({ parsedSchema }) => {
         key: modelPrimaryKeyName,
         optionalInController: false,
         optionalInInterface: false,
+        notPrimaryKey: false,
       },
     ];
   }

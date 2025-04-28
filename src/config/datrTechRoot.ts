@@ -1,3 +1,3 @@
 import path from 'node:path';
 
-export const datrTechRoot = path.resolve('./../../');
+export const datrTechRoot = path.resolve('./../');

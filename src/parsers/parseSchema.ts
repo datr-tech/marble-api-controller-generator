@@ -28,6 +28,8 @@ export const parseSchema = (serviceName, schemaName, schema) => {
     serviceName,
   });
 
+  const usePayload = methodName == keywords.update;
+
   return {
     app,
     appRef,
@@ -45,5 +47,6 @@ export const parseSchema = (serviceName, schemaName, schema) => {
     modelName,
     modelPrimaryKeyName,
     serviceName,
+    usePayload,
   };
 };

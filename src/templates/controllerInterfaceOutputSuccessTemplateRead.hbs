@@ -1,0 +1,8 @@
+import { {{ modelInterfaceName }} } from '{{ appRef }}/interfaces/api/models';
+ 
+export interface {{ controllerInterfaceName }}OutputSuccess {
+  error: false;
+	payload: 	{ 
+		{{ modelInstanceName }}: {{ modelInterfaceName }};
+	};
+}

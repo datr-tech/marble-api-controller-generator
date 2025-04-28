@@ -5,6 +5,8 @@ export const generateControllerInterfaceIndex = ({
   controllerInterfaceDefs,
   controllerInterfaceInputDefs,
   controllerInterfaceOutputDefs,
+  controllerInterfaceOutputErrorDefs,
+  controllerInterfaceOutputSuccessDefs,
 }) => {
   const controllerInterfaceBaseNames = controllerInterfaceDefs.map(
     (controllerInterfaceDef) => ({
@@ -22,9 +24,23 @@ export const generateControllerInterfaceIndex = ({
     }),
   );
 
+  const controllerInterfaceOutputErrorNames = controllerInterfaceOutputErrorDefs.map(
+    (controllerInterfaceOutputErrorDef) => ({
+      controllerInterfaceName: controllerInterfaceOutputErrorDef.name,
+    }),
+  );
+
+  const controllerInterfaceOutputSuccessNames = controllerInterfaceOutputSuccessDefs.map(
+    (controllerInterfaceOutputSuccessDef) => ({
+      controllerInterfaceName: controllerInterfaceOutputSuccessDef.name,
+    }),
+  );
+
   const controllerInterfaceNames = controllerInterfaceBaseNames.concat(
     controllerInterfaceInputNames,
     controllerInterfaceOutputNames,
+    controllerInterfaceOutputErrorNames,
+    controllerInterfaceOutputSuccessNames,
   );
 
   const templateName = controllers.getInterfaceIndexTemplateName();

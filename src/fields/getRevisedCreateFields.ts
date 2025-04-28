@@ -9,6 +9,7 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         key,
         optionalInController: false,
         optionalInInterface: false,
+        notPrimaryKey: true,
       });
     } else if (
       (key == 'adminStatusId' || key == 'description') &&
@@ -20,6 +21,7 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         key,
         optionalInController: true,
         optionalInInterface: false,
+        notPrimaryKey: true,
       });
     } else if (
       (key == 'createdAt' || key == 'updateAt') &&
@@ -31,6 +33,7 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         key,
         optionalInController: true,
         optionalInInterface: true,
+        notPrimaryKey: true,
       });
     } else if (key !== modelPrimaryKeyName && typeof valueObj['type'] !== 'undefined') {
       acc.push({
@@ -39,6 +42,7 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         key,
         optionalInController: false,
         optionalInInterface: false,
+        notPrimaryKey: true,
       });
     }
 

@@ -11,6 +11,7 @@ export const generateController = (parsedSchema) => {
   const dirName = baseName + keywords.controller;
   const templateName = controllers.getTemplateName(methodName);
   const templateData = { ...parsedSchema };
+  templateData.usePayload = methodName == keywords.update;
 
   templateData.imports = generateControllerImports({ parsedSchema });
   templateData.jsdoc = generateControllerJsDoc({ parsedSchema });

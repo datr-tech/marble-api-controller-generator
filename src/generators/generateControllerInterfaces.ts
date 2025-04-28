@@ -1,4 +1,10 @@
 import { generateControllerInterface } from './generateControllerInterface';
 
-export const generateControllerInterfaces = (parsedSchemas, suffix = '') =>
-  parsedSchemas.map((parsedSchema) => generateControllerInterface(parsedSchema, suffix));
+export const generateControllerInterfaces = (
+  parsedSchemas,
+  suffix = '',
+  outputType = '',
+) =>
+  parsedSchemas.map((parsedSchema) =>
+    generateControllerInterface(parsedSchema, suffix, outputType),
+  );

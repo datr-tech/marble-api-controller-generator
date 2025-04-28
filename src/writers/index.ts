@@ -1,5 +1,6 @@
 export { createControllerDir } from './createControllerDir';
 export { removeControllerDir } from './removeControllerDir';
+export { writeBaseStat } from './writeBaseStat';
 export { writeController } from './writeController';
 export { writeControllerEntities } from './writeControllerEntities';
 export { writeControllerEntity } from './writeControllerEntity';

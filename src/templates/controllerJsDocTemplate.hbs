@@ -4,12 +4,13 @@
  * The {{ serviceName }} API {{ methodNameLcase }} {{ baseName }} {{ keywords.controllerLcase }}.
  *
  * @param { {{controllerInterfaceName }}Input } params
-  {{#each fields}}
- * @param { {{ controllerType }} } params.{{ key }} {{#if optionalInController }} (Optional) {{/if ~}}
-  {{/each}}
+ * @param { {{ keywords.typesObjectId }} } params.{{ modelPrimaryKeyName }}
+  {{#each fields }} {{#if notPrimaryKey ~}}
+* @param { {{ controllerType }} } params.{{ key }} {{#if optionalInController }} (Optional) {{/if }}
+  {{/if}} {{/each ~}}
  *
- * @returns { {{controllerInterfaceName }}Output } { error: false, payload: { ... } }} | { error: true, payload: { message } }
- * @throws On Mongoose failure
+ * @returns { Promise<{{controllerInterfaceName }}Output> }
  *
- * @link {https://github.com/datr-tech/marble-api-controller-generator}[ {{ app.name }} (v {{ app.version }}  ) ]
+ * @example On succcess returns: Promise<{ error: false, payload: { {{#if returnPrimaryKey }} {{~ modelPrimaryKeyName ~}} {{ else }} {{~ modelInstanceName ~}} {{/if }} }}>
+ * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
  */ 

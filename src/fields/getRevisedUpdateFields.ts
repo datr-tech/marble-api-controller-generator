@@ -2,21 +2,35 @@ export const getRevisedUpdateFields = (modelInterfaceProps, modelPrimaryKeyName)
   Object.keys(modelInterfaceProps).reduce((acc, key) => {
     const valueObj = modelInterfaceProps[key];
 
-    if (typeof valueObj['$ref'] !== 'undefined') {
+    if (key == modelPrimaryKeyName && typeof valueObj['$ref'] !== 'undefined') {
       acc.push({
         controllerType: 'Types.ObjectId',
         interfaceType: 'Types.ObjectId',
         key,
-        optionalInController: key !== modelPrimaryKeyName,
-        optionalInInterface: key !== modelPrimaryKeyName,
+        interfaceKey: key,
+        optionalInController: false,
+        optionalInInterface: false,
+        notPrimaryKey: false,
       });
-    } else if (typeof valueObj['type'] !== 'undefined') {
+    } else if (key !== modelPrimaryKeyName && typeof valueObj['$ref'] !== 'undefined') {
+      acc.push({
+        controllerType: 'Types.ObjectId',
+        interfaceType: 'Types.ObjectId',
+        key: `payload.${key}`,
+        interfaceKey: key,
+        optionalInController: true,
+        optionalInInterface: true,
+        notPrimaryKey: true,
+      });
+    } else if (key !== modelPrimaryKeyName && typeof valueObj['type'] !== 'undefined') {
       acc.push({
         controllerType: valueObj['type'],
         interfaceType: valueObj['type'],
-        key,
+        key: `payload.${key}`,
+        interfaceKey: key,
         optionalInController: true,
         optionalInInterface: true,
+        notPrimaryKey: true,
       });
     }
 

@@ -1,6 +1,6 @@
 {{ imports }}
 
-{{ jsdoc }}
+{{ jsdoc ~}}
 export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }}, payload }) => {
 
 	{{ tryCatchHeader }}
@@ -16,7 +16,7 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ m
 
 		stat.error = false;
 		stat.payload = { {{ modelPrimaryKeyName }} };
-		return stat;
+    return stat as {{ controllerInterfaceName }}OutputSuccess;
 	
 	{{ tryCatchFooter }}
 }

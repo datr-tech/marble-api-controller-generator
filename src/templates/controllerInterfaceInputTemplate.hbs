@@ -1,7 +1,18 @@
 import { Types } from "mongoose";
 
 export interface {{ controllerInterfaceName }}Input {
-  {{#each fields}}
-    {{ key ~}} {{#if optionalInInterface}} ?: {{ else }} : {{/if }} {{ interfaceType }}
-  {{/each}}
+  {{#if usePayload }}
+		{{ modelPrimaryKeyName }}: {{ keywords.typesObjectId }};
+		{{ keywords.payload }}: {
+			{{#each fields ~}}
+				{{#if notPrimaryKey }}
+					{{ interfaceKey ~}} {{#if optionalInInterface}} ?: {{ else }} : {{/if }} {{ interfaceType ~}};
+				{{/if}}
+			{{/each}}
+		};
+	{{ else }}
+		{{#each fields}}
+			{{~ key ~}} {{#if optionalInInterface}} ?: {{ else }} : {{/if }} {{ interfaceType ~}};
+		{{/each}}
+  {{/if}}
 }

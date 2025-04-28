@@ -1,4 +1,8 @@
-import { Types } from "mongoose";
+{{#if useTypes }} import { Types } from "mongoose"; {{/if}}
 import { {{ modelName }} } from '{{ appRef }}/api/models';
-import { baseStat } from '{{ appRef }}/util/baseStat';
-import { {{ controllerInterfaceName }} } from '{{ appRef }}/interfaces/api/controllers';
+import { baseStat } from '{{ appRef }}/api/util/baseStat';
+import {
+	{{ controllerInterfaceName }},
+	{{ controllerInterfaceName }}OutputError,
+	{{ controllerInterfaceName }}OutputSuccess
+} from '{{ appRef }}/interfaces/api/controllers';

@@ -1,6 +1,6 @@
-import {{ controllerInterfaceName }}Input from "./{{ controllerInterfaceName }}Input";
-import {{ controllerInterfaceName }}Output from "./{{ controllerInterfaceName }}Output";
+import { {{ controllerInterfaceName }}Input } from "./{{ controllerInterfaceName }}Input";
+import { {{ controllerInterfaceName }}Output } from "./{{ controllerInterfaceName }}Output";
 
 export interface {{ controllerInterfaceName }} {
-	(args: {{ controllerInterfaceName }}Input): {{ controllerInterfaceName }}Output;
+	(args: {{ controllerInterfaceName }}Input): Promise<{{ controllerInterfaceName }}Output>;
 }

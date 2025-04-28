@@ -1,6 +1,7 @@
 import { keywords } from '@app-macg/config';
 import { fields } from '@app-macg/fields';
 import {
+  generateBaseStat,
   generateControllerEntities,
   generateControllerInterfaceIndex,
   generateControllerInterfaces,
@@ -10,6 +11,7 @@ import { parseSchemas } from '@app-macg/parsers';
 import {
   createControllerDir,
   removeControllerDir,
+  writeBaseStat,
   writeControllerEntities,
   writeControllerEntityIndexes,
   writeControllers,
@@ -24,11 +26,15 @@ Object.keys(schemas).forEach((service) => {
   const schemasPerService = schemas[service];
   const parsedSchemas = parseSchemas(service, schemasPerService);
   const parsedSchemasRevised = fields.getRevisedFieldsPerParsedSchemas({ parsedSchemas });
+
+  const baseStatDef = generateBaseStat();
   const controllerDefs = generateControllers(parsedSchemasRevised);
   const controllerEntityDefs = generateControllerEntities(controllerDefs);
 
   removeControllerDir(service);
   createControllerDir(service);
+
+  writeBaseStat(baseStatDef, service);
   writeControllers(controllerDefs, service);
   writeControllerEntities(controllerEntityDefs, service);
   writeControllerEntityIndexes(controllerEntityDefs, service);
@@ -42,14 +48,28 @@ Object.keys(schemas).forEach((service) => {
     parsedSchemasRevised,
     keywords.output,
   );
+  const controllerInterfaceOutputErrorDefs = generateControllerInterfaces(
+    parsedSchemasRevised,
+    keywords.output,
+    keywords.error,
+  );
+  const controllerInterfaceOutputSuccessDefs = generateControllerInterfaces(
+    parsedSchemasRevised,
+    keywords.output,
+    keywords.success,
+  );
   const controllerInterfaceIndexDef = generateControllerInterfaceIndex({
     controllerInterfaceDefs,
     controllerInterfaceInputDefs,
     controllerInterfaceOutputDefs,
+    controllerInterfaceOutputErrorDefs,
+    controllerInterfaceOutputSuccessDefs,
   });
 
   writeInterfaces(controllerInterfaceDefs, service);
   writeInterfaces(controllerInterfaceInputDefs, service);
   writeInterfaces(controllerInterfaceOutputDefs, service);
+  writeInterfaces(controllerInterfaceOutputErrorDefs, service);
+  writeInterfaces(controllerInterfaceOutputSuccessDefs, service);
   writeInterfaceIndex(controllerInterfaceIndexDef, service);
 });

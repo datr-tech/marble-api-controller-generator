@@ -1,13 +1,14 @@
 {{ imports }}
 
-{{ jsdoc }}
+{{ jsdoc ~}}
 export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
 	{{ tryCatchHeader }}
 		const {{ modelInstanceName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
 
 		stat.error = false;
 		stat.payload = { {{ modelInstanceName }} };
-		return stat;
+		return stat as {{ controllerInterfaceName }}OutputSuccess;
+
 	{{ tryCatchFooter }}
 };
 
