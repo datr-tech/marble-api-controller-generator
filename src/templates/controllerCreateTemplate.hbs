@@ -38,7 +38,7 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * 'stat', to return the found model.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}._id };
+		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}.{{ modelPrimaryKeyName }} };
     
     /*
      * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
