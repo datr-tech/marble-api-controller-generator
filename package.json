@@ -1,6 +1,6 @@
 {
   "name": "@datr.tech/marble-api-controller-generator",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "private": false,
   "description": "Marble API controller generator",
   "keywords": [
