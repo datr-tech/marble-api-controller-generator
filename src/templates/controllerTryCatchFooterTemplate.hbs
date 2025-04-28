@@ -1,5 +1,14 @@
 	} catch(error) {
+    
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the error message.
+     */ 
 		const { message } = error;
 		stat.payload = { message };
+    
+    /*
+     * Cast the response object to '{{ controllerInterfaceName }}OutputError',
+     */ 
 		return stat as {{ controllerInterfaceName }}OutputError;
 	}

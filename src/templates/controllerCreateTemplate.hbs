@@ -9,6 +9,10 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
 
 	{{ tryCatchHeader }}
 
+		/*
+     * Populate the local 'modelParams' variable
+     * with the received inputs.
+     */
 		const {{ modelPrimaryKeyName }} = new Types.ObjectId();
 		const modelParams = {
 			{{ modelPrimaryKeyName }},
@@ -17,11 +21,30 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
 			{{/fields}}
 		};
 
+		/*
+     * Use the populated 'modelParams' variable
+     * to create a new instance of '{{ modelName }}'.
+     * 'db-{{ serviceName }}'.
+     */
 		const {{ modelInstanceName }} = new {{ modelName }}(modelParams);
+
+    /*
+     * The save the created model to the associated store: 'db-{{ serviceName }}',
+     */
 		await {{ modelInstanceName }}.save();
 	
+		/*
+     * Use the standard controller response object,
+     * 'stat', to return the found model.
+     */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }} };
+		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}._id };
+    
+    /*
+     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of the binary union type
+     * '{{ controllerInterfaceName }}Output'.
+     */ 
 		return stat as {{ controllerInterfaceName }}OutputSuccess;
 
 	{{ tryCatchFooter }}

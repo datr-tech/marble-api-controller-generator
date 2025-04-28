@@ -10,7 +10,8 @@
   {{/if}} {{/each ~}}
  *
  * @returns { Promise<{{controllerInterfaceName }}Output> }
+ * @returns { Promise<{{controllerInterfaceName }}OutputError> } ON ERROR: Promise<{ error: true, payload: { message }}>
+ * @returns { Promise<{{controllerInterfaceName }}OutputSuccess> } ON SUCCESS: Promise<{ error: false, payload: { {{#if returnPrimaryKey }} {{~ modelPrimaryKeyName ~}} {{ else }} {{~ modelInstanceName ~}} {{/if }} }}>
  *
- * @example On succcess returns: Promise<{ error: false, payload: { {{#if returnPrimaryKey }} {{~ modelPrimaryKeyName ~}} {{ else }} {{~ modelInstanceName ~}} {{/if }} }}>
- * @example On failure returns: Promise<{ error: true, payload: { message }}> On failure
+ * @author Datr.Tech Admin <admin@datr.tech>
  */ 

@@ -1,10 +1,19 @@
 {{ imports }}
 
 {{ jsdoc ~}}
-export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
+  {{ modelPrimaryKeyName }}
+}) => {
 	{{ tryCatchHeader }}
 		
-		await {{ modelName }}.findOneAndUpdate(
+    /*
+     * Attempt to find an instance of '{{ modelName }}'
+     * using the received '{{ modelPrimaryKeyName }}' param.
+     * When successful, perform a "soft delete" upon the
+     * found model by updating the value of the model's
+     * 'adminStatusId' field.
+     */
+		const {{ modelInstanceName }} = await {{ modelName }}.findOneAndUpdate(
 			{
 				_id: {{ modelPrimaryKeyName }}
 			},
@@ -15,9 +24,20 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ m
 				includeResultMetadata: true
 			}
 		);
-
+    
+		/*
+     * Use the standard controller response object,
+     * 'stat', to return the primary key of the
+     * "soft deleted" model.
+     */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }} };
+		stat.payload = { {{ modelPrimaryKeyName }}: {{ modelInstanceName }}._id };
+    
+    /*
+     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of the binary union type
+     * '{{ controllerInterfaceName }}Output'.
+     */ 
     return stat as {{ controllerInterfaceName }}OutputSuccess;
 	
 	{{ tryCatchFooter }}

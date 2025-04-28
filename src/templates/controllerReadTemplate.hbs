@@ -1,12 +1,31 @@
 {{ imports }}
 
 {{ jsdoc ~}}
-export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }} }) => {
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
+	{{ modelPrimaryKeyName }}
+}) => {
 	{{ tryCatchHeader }}
-		const {{ modelInstanceName }} = await {{ modelName }}.findById({{ modelPrimaryKeyName }});
+		
+    /*
+     * Attempt to find an instance of '{{ modelName }}'
+     * using the received '{{ modelPrimaryKeyName }}' param.
+     */
+		const {{ modelInstanceName }} = await {{ modelName }}.findById(
+			{{ modelPrimaryKeyName }}
+		);
 
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the found model.
+     */ 
 		stat.error = false;
 		stat.payload = { {{ modelInstanceName }} };
+		
+    /*
+     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of the binary union type
+     * '{{ controllerInterfaceName }}Output'.
+     */ 
 		return stat as {{ controllerInterfaceName }}OutputSuccess;
 
 	{{ tryCatchFooter }}

@@ -1,9 +1,20 @@
 {{ imports }}
 
 {{ jsdoc ~}}
-export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ modelPrimaryKeyName }}, payload }) => {
+export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
+  {{ modelPrimaryKeyName }},
+  payload
+}) => {
 
 	{{ tryCatchHeader }}
+    
+    /*
+     * Attempt to find an instance of '{{ modelName }}'
+     * using the received '{{ modelPrimaryKeyName }}' param.
+     * When successful, update the found model using
+     * the key value pairs (or fields) from within the
+     * 'payload' param.
+     */
 		await {{ modelName }}.findOneAndUpdate(
 			{
 				_id: {{ modelPrimaryKeyName }}
@@ -14,8 +25,18 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({ {{ m
 			}
 		);
 
+    /*
+     * Use the standard controller response object,
+     * 'stat', to return the updated model's primary key.
+     */ 
 		stat.error = false;
 		stat.payload = { {{ modelPrimaryKeyName }} };
+		
+    /*
+     * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',
+     * where the casting interface is a component of the binary union type
+     * '{{ controllerInterfaceName }}Output'.
+     */ 
     return stat as {{ controllerInterfaceName }}OutputSuccess;
 	
 	{{ tryCatchFooter }}
