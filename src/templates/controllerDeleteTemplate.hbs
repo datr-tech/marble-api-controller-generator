@@ -13,7 +13,7 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * found model by updating the value of the model's
      * 'adminStatusId' field.
      */
-		const {{ modelInstanceName }} = await {{ modelName }}.findOneAndUpdate(
+		await {{ modelName }}.findOneAndUpdate(
 			{
 				_id: {{ modelPrimaryKeyName }}
 			},
