@@ -19,7 +19,10 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * 'stat', to return the found model.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelInstanceName }} };
+		stat.payload = {
+			{{ modelInstanceName }},
+			responseStatusCode: 200
+		};
 		
     /*
      * Cast the response object to

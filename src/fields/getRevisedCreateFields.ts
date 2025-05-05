@@ -11,10 +11,7 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         optionalInInterface: false,
         notPrimaryKey: true,
       });
-    } else if (
-      (key == 'adminStatusId' || key == 'description') &&
-      typeof valueObj['type'] !== 'undefined'
-    ) {
+    } else if (key == 'adminStatusId' && typeof valueObj['type'] !== 'undefined') {
       acc.push({
         controllerType: valueObj['type'],
         interfaceType: `${valueObj['type']} | undefined`,
@@ -23,10 +20,25 @@ export const getRevisedCreateFields = (modelInterfaceProps, modelPrimaryKeyName)
         optionalInInterface: false,
         notPrimaryKey: true,
       });
-    } else if (
-      (key == 'createdAt' || key == 'updateAt') &&
-      typeof valueObj['type'] !== 'undefined'
-    ) {
+    } else if (key == 'description' && typeof valueObj['type'] !== 'undefined') {
+      acc.push({
+        controllerType: valueObj['type'],
+        interfaceType: `${valueObj['type']} | undefined`,
+        key,
+        optionalInController: true,
+        optionalInInterface: false,
+        notPrimaryKey: true,
+      });
+    } else if (key == 'createdAt' && typeof valueObj['type'] !== 'undefined') {
+      acc.push({
+        controllerType: valueObj['type'],
+        interfaceType: valueObj['type'],
+        key,
+        optionalInController: true,
+        optionalInInterface: true,
+        notPrimaryKey: true,
+      });
+    } else if (key == 'updatedAt' && typeof valueObj['type'] !== 'undefined') {
       acc.push({
         controllerType: valueObj['type'],
         interfaceType: valueObj['type'],

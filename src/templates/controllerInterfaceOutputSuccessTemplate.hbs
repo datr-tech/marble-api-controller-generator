@@ -4,5 +4,6 @@ export interface {{ controllerInterfaceName }}OutputSuccess {
   error: false;
 	payload: 	{ 
 		{{ modelPrimaryKeyName }}: {{ keywords.typesObjectId }};
+		responseStatusCode: number;
 	};
 }

@@ -30,7 +30,10 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * 'stat', to return the updated model's primary key.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }} };
+		stat.payload = {
+			{{ modelPrimaryKeyName }},
+			responseStatusCode: 200
+		};
 		
     /*
      * Cast the response object to '{{ controllerInterfaceName }}OutputSuccess',

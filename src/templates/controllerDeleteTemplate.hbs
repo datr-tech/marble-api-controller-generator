@@ -31,7 +31,10 @@ export const {{ controllerName }}: {{ controllerInterfaceName }} = async ({
      * "soft deleted" model.
      */ 
 		stat.error = false;
-		stat.payload = { {{ modelPrimaryKeyName }} };
+		stat.payload = {
+			{{ modelPrimaryKeyName }},
+			responseStatusCode: 200
+		};
     
     /*
      * Cast the response object to
